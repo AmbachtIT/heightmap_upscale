@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GTiff2Tiles" Version="1.4.1" />
+    <PackageReference Include="Microsoft.ML.TensorFlow.Redist" Version="0.14.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="SciSharp.TensorFlow.Redist-Windows-GPU" Version="1.14.1" />
+    <PackageReference Include="TensorFlow.NET" Version="0.14.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ambacht.Data\Ambacht.Data.csproj" />
+    <ProjectReference Include="..\Ambacht.HeightmapUpscale\Ambacht.HeightmapUpscale.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Ahn\" />
+  </ItemGroup>
+
+</Project>
