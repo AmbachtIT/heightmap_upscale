@@ -7,12 +7,12 @@ using System.Text;
 using NumSharp;
 using NumSharp.Generic;
 
-namespace Ambacht.Data.NzDem
+namespace Ambacht.Data.Dem
 {
     public static class NzReader
     {
         
-        public static NzFile Read(string path)
+        public static Heightmap Read(string path)
         {
             using (var stream = File.OpenRead(path))
             {
@@ -20,7 +20,7 @@ namespace Ambacht.Data.NzDem
             }            
         }
 
-        public static NzFile Read(Stream stream)
+        public static Heightmap Read(Stream stream)
         {
             using (var reader = new StreamReader(stream))
             {
@@ -40,9 +40,9 @@ namespace Ambacht.Data.NzDem
             }
         }
 
-        private static NzFile ReadHeader(StreamReader reader)
+        private static Heightmap ReadHeader(StreamReader reader)
         {
-            var result = new NzFile();
+            var result = new Heightmap();
             result.Columns = int.Parse(ReadHeader(reader, "ncols"));
             result.Rows = int.Parse(ReadHeader(reader, "nrows"));
             ReadHeader(reader, "xllcorner");

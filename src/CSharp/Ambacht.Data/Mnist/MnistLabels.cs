@@ -6,6 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using ICSharpCode.SharpZipLib.GZip;
+using NumSharp;
+using NumSharp.Generic;
 
 namespace Ambacht.Data.Mnist
 {
@@ -40,17 +42,23 @@ namespace Ambacht.Data.Mnist
                 }
 
                 var count = reader.ReadInt32BigEndian();
-                var result = new MnistLabels();
+                var result = new MnistLabels()
+                {
+                    Count = count,
+                    Labels = new NDArray<byte>(new Shape(count))
+                };
                 for (var i = 0; i < count; i++)
                 {
-                    result.labels.Add(reader.ReadByte());
+                    result.Labels[i] = reader.ReadByte();
                 }
 
                 return result;
             }
         }
 
-        private readonly List<byte> labels = new List<byte>();
+        public int Count { get; set; }
+        
+        public NDArray<byte> Labels { get; set; }
 
     }
 }

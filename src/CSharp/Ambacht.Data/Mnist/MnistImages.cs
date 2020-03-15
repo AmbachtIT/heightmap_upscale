@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Mime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using ICSharpCode.SharpZipLib.GZip;
+using NumSharp;
+using NumSharp.Generic;
 
 namespace Ambacht.Data.Mnist
 {
@@ -44,16 +47,20 @@ namespace Ambacht.Data.Mnist
                 var count = reader.ReadInt32BigEndian();
                 var rows = reader.ReadInt32BigEndian();
                 var columns = reader.ReadInt32BigEndian();
-                var result = new MnistImages();
+                var result = new MnistImages()
+                {
+                    Count = count,
+                    Images = new NDArray<byte>(new Shape(count, rows, columns))
+                };
+                
                 for (var i = 0; i < count; i++)
                 {
-                    var image = new Matrix(rows, columns);
                     for (var r = 0; r < rows; r++)
                     {
                         for (var c = 0; c < columns; c++)
                         {
                             var b = reader.ReadByte();
-                            image[r, c] = b;
+                            result.Images[i, r, c] = b;
                         }
                     }
                 }
@@ -62,8 +69,8 @@ namespace Ambacht.Data.Mnist
             } 
         }
 
-
-        public List<Matrix> Images { get; } = new List<Matrix>();
+        public int Count { get; set; }
+        public NDArray<byte> Images { get; set; }
 
     }
 }

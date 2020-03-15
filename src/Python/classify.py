@@ -1,11 +1,12 @@
 import tensorflow as tf
 import numpy as np
 import heightmap
-import model1
+import model
 from tensorflow import keras
 import glob
 import os
-import png as png
+import util
+
 
 # Parameters
 DATA_PATH = "C:/Projects/heightmap_upscale/data/"

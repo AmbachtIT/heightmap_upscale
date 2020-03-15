@@ -8,15 +8,6 @@ import os
 
 TILESIZE = 128
 
-#mnist = keras.datasets.mnist
-#(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
-
-#image = X_train[0]
-#image = image.astype('uint16')
-#image *= 256
-
-# png.from_array(image, mode="L").save("C:/Projects/heightmap_upscale/data/output.png")
-
 def pngToArray(path):
     map = loadHeightmap(path, np.uint8)
     map = map.flatten().astype('float32')
@@ -72,7 +63,7 @@ def downSampleHeightmap(data, type, times):
 
     return copy
 
-def run():
+def run(outputPath):
     for originalPath in glob.glob("C:/Projects/heightmap_upscale/data/8-bit/originals/*.png"):
         fileName = os.path.split(originalPath)[1]
         print("processing: ", fileName)
@@ -82,7 +73,6 @@ def run():
         width = original.shape[1]
         height = original.shape[0]
 
-        outputPath = "C:/Projects/heightmap_upscale/data/8-bit/"
         prefix = fileName.split('.')[0]
 
         for y in range(int(height / TILESIZE)):
@@ -103,7 +93,7 @@ def run():
                 png.from_array(x, mode="L").save(outputPath + folder + "-x/" + tileName)
     return
 
-# run()
+# run("D:/Data/heightmap_upscale/8-bit/")
 
 
 
